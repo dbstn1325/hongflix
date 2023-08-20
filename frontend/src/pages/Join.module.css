@@ -25,7 +25,6 @@ input:focus {
   align-items: center;
   justify-content: center;
   width: 488px;
-  height: 600px;
   border: 2px solid rgb(50, 50, 50);
 }
 .joinForm {
