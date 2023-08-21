@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import AdminHome from "./admin/AdminHome";
+import { Route, Routes } from "react-router-dom";
+import AdminContent from "./admin/AdminContent";
+import AdminSetting from "./admin/AdminSetting";
+import AdminMembers from "./admin/AdminMembers";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route
+          path="/admin"
+          element={
+            <>
+              <AdminHome></AdminHome>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/contents"
+          element={
+            <>
+              <AdminContent></AdminContent>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/setting"
+          element={
+            <>
+              <AdminSetting></AdminSetting>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/members"
+          element={
+            <>
+              <AdminMembers></AdminMembers>
+            </>
+          }
+        ></Route>
+      </Routes>
     </div>
   );
 }
