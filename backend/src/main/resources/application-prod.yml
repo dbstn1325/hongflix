@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.31.7.8:3306/hongflix_db?serverTimezone=Asia/Seoul
+    username: root
+    password: 0000
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none
+      use-new-id-generator-mappings: false
+      show-sql: true
+      format_sql: true
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+
+aws:
+  sns:
+    accessKey: "AKIAZ75G5IVSOTAEKUET"
+    secretKey: "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"

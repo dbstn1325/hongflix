@@ -1,0 +1,64 @@
+spring:
+  environment: "local"
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hongflix_db?useSSL=false&serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  servlet:
+    multipart:
+      max-file-size: 1GB
+      max-request-size: 1GB
+  file-dir: /src/main/resources/static/files/
+
+mybatis:
+  type-aliases-package: com.hongsam.hongflix
+  configuration:
+    map-underscore-to-camel-case: true
+
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  api-docs:
+    groups:
+      enabled: true
+  swagger-ui:
+    operations-sorter: alpha # alpha(알파벳 오름차순), method(HTTP메소드순)
+    tags-sorter: alpha # 태그 정렬 기준
+    path: /swagger-ui.html # html 문서 접속 경로
+    disable-swagger-default-url: true
+    display-query-params-without-oauth2: true
+    doc-expansion: none # tag, operation 펼치는 방식
+  paths-to-match:
+    - /**
+
+cloud:
+  aws:
+    s3:
+      bucket: hongflix-bucket
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+    credentials:
+      access-key: AKIA2HUKKVFHWE3CO2HW
+      secret-key: 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
+
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
+
+aws:
+  sns:
+    accessKey: "AKIAZ75G5IVSOTAEKUET"
+    secretKey: "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"
