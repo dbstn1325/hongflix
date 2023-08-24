@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Auth.module.css";
 import { Link } from "react-router-dom";
 
-export default function Login({
+export default function LoginForAdmin({
   inputValue,
   handleFocus,
   inputClear,
@@ -21,7 +21,7 @@ export default function Login({
       email: email,
       password: password,
     };
-    isLogin(loginInfo, `${url}/members/login`);
+    isLogin(loginInfo, `${url}member/admin/login`);
 
     console.log(`Email : ${email}\npassword : ${password}`);
   };

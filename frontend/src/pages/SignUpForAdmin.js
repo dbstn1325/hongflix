@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Auth.module.css";
 import axios from "axios";
 
-export default function SignUp({
+export default function SignUpForAdmin({
   inputValue,
   handleFocus,
   inputClear,
@@ -128,7 +128,7 @@ export default function SignUp({
       nickName: nickName,
       phoneNumber: phoneNumber,
     };
-    isSignUp(userInfo, `${url}members/signup`);
+    isSignUp(userInfo, `${url}membbers/admin/signup`);
   };
 
   useEffect(() => {
