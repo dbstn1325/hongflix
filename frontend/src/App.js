@@ -4,6 +4,8 @@ import SignUp from "./pages/SignUp";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import SignUpForAdmin from "./pages/SignUpForAdmin";
+import LoginForAdmin from "./pages/LoginForAdmin";
 
 function App() {
   const url = `http://localhost:8080/`;
@@ -40,7 +42,7 @@ function App() {
       .post(url, { email: loginInfo["email"], password: loginInfo["password"] })
       .then((res) => {
         console.log(res.data);
-        setIsLogined(res.data);
+        setIsLogined(true);
       })
       .catch((err) => {
         console.log(err);
@@ -75,6 +77,34 @@ function App() {
                 isSignUp={isSignUp}
                 url={url}
               ></SignUp>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/login"
+          element={
+            <>
+              <LoginForAdmin
+                inputValue={inputValue}
+                handleFocus={handleFocus}
+                inputClear={inputClear}
+                isLogin={isLogin}
+                url={url}
+              ></LoginForAdmin>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/signup"
+          element={
+            <>
+              <SignUpForAdmin
+                inputValue={inputValue}
+                handleFocus={handleFocus}
+                inputClear={inputClear}
+                isSignUp={isSignUp}
+                url={url}
+              ></SignUpForAdmin>
             </>
           }
         ></Route>
