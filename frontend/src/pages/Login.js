@@ -37,10 +37,8 @@ export default function Login({
         <div
           className={`${styles.Container} flex flex-col justify-center items-center rounded-lg`}
         >
-          <div
-            className={`${styles.FormHeader} mt-10 text-center font-black flex flex-col gap-3 mb-3`}
-          >
-            <h1 className="text-2xl">HONG CHA</h1>
+          <div className={`${styles.FormHeader} mt-10 text-center font-black`}>
+            <h1>HONG CHA</h1>
             <p>동시방영 신작부터 역대 인기작까지</p>
             <p>한 곳에서 편안-하게!</p>
           </div>
@@ -124,7 +122,7 @@ export default function Login({
               </div>
             </div>
             <p className={`${styles.FormText} mt-2`}>
-              계정이 없으시다면 .. <Link to={"/signup"}> 가입하기</Link>
+              계정이 없으시다면..<Link to={"/signup"}> 가입하기</Link>
             </p>
             <div className="mb-10">
               <button
