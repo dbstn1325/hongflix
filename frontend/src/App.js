@@ -1,36 +1,57 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Header from './home/Header'; // Header 컴포넌트 import
-
-// 각 페이지에 대한 컴포넌트 import
-import Home from './home/Home';
-import Category from './pages/Category';
-import Login from './pages/Login';
-import MyPage from './pages/MyPage';
-import Search from './pages/Search';
-import Footer from './home/Footer';
+import { Route, Router, Routes } from 'react-router-dom';
+import './App.css';
+import AdminHome from './admin/AdminHome';
+import AdminMembers from './admin/AdminMembers';
+import AdminMovies from './admin/AdminMovies';
+import AdminSetting from './admin/AdminSetting';
+import AdminContents from './admin/AdminContents';
 
 function App() {
-  const isLoggedIn = false; // 로그인 여부 상태
-
   return (
-    <div className="App">
-      <BrowserRouter>
-        <div className="flex flex-col h-screen">
-          <div className="flex-1">
-            <Header isLoggedIn={isLoggedIn} />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/category" element={<Category />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/mypage" element={<MyPage />} />
-            </Routes>
-          </div>
-          <Footer />
-        </div>
-      </BrowserRouter>
-    </div>
+    <>
+      <Routes>
+        <Route
+          path="/admin"
+          element={
+            <>
+              <AdminHome></AdminHome>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/movies"
+          element={
+            <>
+              <AdminMovies></AdminMovies>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/members"
+          element={
+            <>
+              <AdminMembers></AdminMembers>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/setting"
+          element={
+            <>
+              <AdminSetting></AdminSetting>
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/movies/contents/:movieTitle/:movieId"
+          element={
+            <>
+              <AdminContents></AdminContents>
+            </>
+          }
+        ></Route>
+      </Routes>
+    </>
   );
 }
 

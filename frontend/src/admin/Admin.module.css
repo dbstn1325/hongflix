@@ -1,0 +1,76 @@
+a {
+  text-decoration: none;
+}
+.navBarBackground {
+  background-color: #eeeeee;
+  min-width: 240px;
+  max-width: 400px;
+}
+.navProfileText {
+  transition: 0.5s;
+}
+.navProfileImg {
+  margin-top: 20px;
+}
+.navItem {
+  margin-top: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5;
+}
+.navItemCur {
+  background-color: #323232;
+  color: #eeeeee;
+}
+.navItem:hover {
+  background-color: #323232;
+  color: #eeeeee;
+  transition: 0.5s;
+}
+.navProfileIg {
+  min-width: 96px;
+  transition: 0.5s;
+}
+.contentFormCreateBtn,
+.contentFormSerchBtn,
+.contentModalCreateBtn {
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+}
+.contentModalCreateBtn {
+  background-color: #323232;
+  color: #eeeeee;
+}
+.contentFormBtnBox .contentFormSerchBtn {
+  background-color: #eeeeee;
+}
+.contentFormCreateBtn {
+  background-color: #323232;
+  color: #eeeeee;
+  position: absolute;
+  right: 0;
+}
+.modalContainer {
+  background-color: white;
+  top: 20%;
+  min-height: 600px;
+}
+.adminTableHead {
+  background-color: #323232;
+  color: #eeeeee;
+}
+@media screen and (max-width: 776px) {
+  .navBarBackground {
+    max-width: none;
+  }
+  .navProfileImg {
+    min-width: 64px;
+  }
+  .contentFormCreateBtn,
+  .contentFormSerchBtn {
+    width: 70px;
+    height: 40px;
+    border-radius: 5px;
+  }
+}

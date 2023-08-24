@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongsam.hongflix.member.repository.MemberMapper">
+
+    <insert id="userSignup" useGeneratedKeys="true" keyColumn="id" keyProperty="memberId" >
+        insert into member (email,password,phone_number,nick_name,roll)
+        values (#{email},#{password},#{phoneNumber},#{nickName},"user");
+    </insert>
+
+    <insert id="userSignupSubscribe">
+        insert into subscribe values (#{memberId},false,"0");
+    </insert>
+
+    <insert id="adminSignup">
+        insert into member (email,password,phone_number,nick_name,roll)
+        values (#{email},#{password},#{phoneNumber},#{nickName},"admin");
+    </insert>
+
+    <select id="findPasswordByEmail" resultType="String">
+        select password from member
+        where email = #{email};
+    </select>
+
+    <select id="findUserByEmail" resultType="LoginUserResponse">
+        select m.id as memberId, m.email, m.nick_name, m.roll, s.available, s.period
+        from member m
+        inner join subscribe s
+        on m.id = s.id
+        where m.email = #{email};
+    </select>
+
+    <select id="findAdminByEmail" resultType="LoginAdminResponse">
+        select id as memberId, email, nick_name, roll from member
+        where email = #{email};
+    </select>
+
+
+</mapper>
