@@ -55,7 +55,7 @@ public class MemberController {
 //                .forEachRemaining(name -> log.info("session name={}, value={}", name, session.getAttribute(name)));
 //        log.info("sessionId={}", session.getId());
 //        LoginUserResponse test = (LoginUserResponse) session.getAttribute("loginMember");
-//        log.info("memberId={}",test.getMemberId());
+//        log.info("memberId={}",test.getRoll());
 
         return new MemberResponse(200, loginMember);
     }

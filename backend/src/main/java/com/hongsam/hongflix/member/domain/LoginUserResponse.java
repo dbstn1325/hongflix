@@ -12,6 +12,6 @@ public class LoginUserResponse {
     private String roll;
 
     private int available;
-    private String period;
+    private int period;
 
 }

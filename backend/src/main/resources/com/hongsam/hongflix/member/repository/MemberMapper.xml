@@ -9,7 +9,7 @@
     </insert>
 
     <insert id="userSignupSubscribe">
-        insert into subscribe values (#{memberId},false,"0");
+        insert into subscribe values (#{memberId},0,0);
     </insert>
 
     <insert id="adminSignup">
