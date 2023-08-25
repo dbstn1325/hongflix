@@ -13,7 +13,7 @@ export default function SignUp({
   const [emailCheck, setEmailCheck] = useState(false);
   const [isEmailWarringTextView, setIsEmailWarringTextView] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
-  const [isEmailSameCheck, setIsEmailSameCheck] = useState(false);
+  const [isEmailSameCheck, setIsEmailSameCheck] = useState(true);
 
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState(false);
@@ -33,9 +33,9 @@ export default function SignUp({
   const [isPhoneNumberReg, setIsPhoneNumberReg] = useState(false);
 
   const [smsCode, setSmsCode] = useState("");
-  const [isSmsCode, setIsSmsCode] = useState(false);
+  const [isSmsCodeCheck, setIsSmsCodeCheck] = useState(false);
   const [isSmsCodeFocused, setIsSmsCodeFocused] = useState(false);
-  const resSmsCode = "1234";
+  const [resSmsCode, setResSmsCode] = useState("");
 
   const [phoneNumberCheck, setPhoneNumberCheck] = useState(false);
 
@@ -61,14 +61,15 @@ export default function SignUp({
   //폰 번호 보내고 인증번호 요청
   const phoneNumberReq = async (e) => {
     e.preventDefault();
-    setIsSmsCode(true);
-    console.log(phoneNumber.replaceAll("-", ""));
+    setIsSmsCodeCheck(true);
+    console.log(`phoneNumber : +82${phoneNumber}`);
     await axios
       .post(`${url}members/signup/message`, {
-        phoneNumber: phoneNumber,
+        phoneNumber: `+82${phoneNumber}`,
       })
       .then((res) => {
-        resSmsCode = res.data;
+        setResSmsCode(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         alert(err);
@@ -78,11 +79,12 @@ export default function SignUp({
   //email 중복확인 함수
   const sameCheckEmail = async (e) => {
     e.preventDefault();
+    console.log(`email : ${email}`);
     await axios
       .post(`${url}members/signup/email-check`, { email: email })
       .then((res) => {
         console.log(res.data);
-        setIsEmailSameCheck(true);
+        setIsEmailSameCheck(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -150,14 +152,13 @@ export default function SignUp({
     emailCheck && passwordCheck && nickName && phoneNumberCheck
       ? setIsButtonActive(true)
       : setIsButtonActive(false);
-    console.log(isButtonActive);
   });
   useEffect(() => {
     if (phoneNumber.length > 12) {
       setIsPhoneNumberReg(true);
     } else {
       setIsPhoneNumberReg(false);
-      setIsSmsCode(false);
+      setIsSmsCodeCheck(false);
     }
 
     console.log("phoneReg : ", isPhoneNumberReg);
@@ -169,7 +170,9 @@ export default function SignUp({
       <div
         className={`${styles.Container} flex flex-col justify-center items-center rounded-lg`}
       >
-        <div className={`${styles.FormHeader} mt-10 text-center font-black`}>
+        <div
+          className={`${styles.FormHeader} mt-10 text-center font-black flex flex-col gap-3 mb-3`}
+        >
           <h1>HONG CHA</h1>
           <p>회원가입</p>
         </div>
@@ -204,7 +207,6 @@ export default function SignUp({
                   onClick={(e) => {
                     sameCheckEmail(e);
                   }}
-                  disabled={phoneNumberCheck}
                 >
                   중복확인
                 </button>
@@ -411,7 +413,7 @@ export default function SignUp({
               ) : null}
             </div>
           </div>
-          {isSmsCode && isPhoneNumberReg ? (
+          {isSmsCodeCheck && isPhoneNumberReg ? (
             <div
               className={`${styles.FormItem} ${
                 isSmsCodeFocused ? styles.FormItemFocus : ""

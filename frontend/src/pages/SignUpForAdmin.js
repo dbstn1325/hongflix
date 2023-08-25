@@ -62,7 +62,7 @@ export default function SignUpForAdmin({
   const phoneNumberReq = async (e) => {
     e.preventDefault();
     setIsSmsCode(true);
-    console.log(phoneNumber.replaceAll("-", ""));
+    console.log(`+82${phoneNumber.replaceAll("-", "")}`);
     await axios
       .post(`${url}members/signup/message`, {
         phoneNumber: phoneNumber,
@@ -169,9 +169,11 @@ export default function SignUpForAdmin({
       <div
         className={`${styles.Container} flex flex-col justify-center items-center rounded-lg`}
       >
-        <div className={`${styles.FormHeader} mt-10 text-center font-black`}>
+        <div
+          className={`${styles.FormHeader} mt-10 text-center font-black flex flex-col gap-3 mb-3`}
+        >
           <h1>HONG CHA</h1>
-          <p>회원가입</p>
+          <p>관리자 회원가입</p>
         </div>
         <form className={`${styles.Form}`} action="" method="POST">
           <div
