@@ -30,12 +30,12 @@ export default function AdminMovies() {
     return movieIndex;
   };
 
-  const apiUrl = "http://localhost:8080/";
+  const apiUrl = "https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/";
   const navigator = useNavigate();
 
   const fetchMovies = async () => {
     await axios
-      .get(`${apiUrl}/movies`)
+      .get(`${apiUrl}/movies`, { withCredentials: true })
       .then((res) => {
         console.log(res.data);
         setMovies(res.data);

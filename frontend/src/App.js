@@ -1,7 +1,9 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Header from "./home/Header"; // Header 컴포넌트 import
+import Header from "./home/Header";
+
+// Header 컴포넌트 import
 
 // 각 페이지에 대한 컴포넌트 import
 import Home from "./home/Home";
@@ -20,8 +22,12 @@ import AdminMovies from "./admin/AdminMovies";
 import AdminSetting from "./admin/AdminSetting";
 
 function App() {
-  const isLoggedIn = false; // 로그인 여부 상태
-  const url = `http://localhost:8080/`;
+  const url = `https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/`;
+
+  const [isLogined, setIsLogined] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+  console.log(isLogined);
+  console.log(userInfo);
   const inputValue = (e, setValue) => {
     e.preventDefault();
     setValue(e.target.value);
@@ -38,18 +44,19 @@ function App() {
     console.log("email : ", userInfo["email"]);
     console.log("password : ", userInfo["password"]);
     console.log("nickName : ", userInfo["nickName"]);
-    console.log(
-      `phoneNumber :  +82${userInfo["phoneNumber"].replaceAll("-", "")}`
-    );
+    console.log("phoneNumber", userInfo["phoneNumber"].replaceAll("-", ""));
     await axios
       .post(url, {
         email: userInfo["email"],
         password: userInfo["password"],
         nickName: userInfo["nickName"],
-        phoenNumber: userInfo["phoneNumber"],
+        phoneNumber: userInfo["phoneNumber"].replaceAll("-", ""),
       })
       .then((res) => {
         console.log(res.data);
+        alert(res.data.data);
+        if (res.data.status === 200) {
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -60,6 +67,13 @@ function App() {
       .post(url, { email: loginInfo["email"], password: loginInfo["password"] })
       .then((res) => {
         console.log(res.data);
+        if (res.data.status === 200) {
+          setIsLogined(true);
+          setUserInfo(res.data.data);
+          alert("로그인이 성공했습니다");
+        } else {
+          alert(res.data.data);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -72,7 +86,7 @@ function App() {
       <BrowserRouter>
         <div className="flex flex-col h-screen">
           <div className="flex-1">
-            <Header isLoggedIn={isLoggedIn} />
+            <Header isLoggedIn={isLogined} />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/category" element={<Category />} />

@@ -34,9 +34,14 @@ export default function AdminContentCreateModal({
     formData.append("file", accessUrl);
     formData.append("contentCreateReqDto", blob, "contentCreateReqDto.json");
     await axios
-      .post(`${apiUrl}movies/${movieId}`, formData, {
-        header: { "Content-Type": "multipart/form-data" },
-      })
+      .post(
+        `${apiUrl}movies/${movieId}`,
+        formData,
+        {
+          header: { "Content-Type": "multipart/form-data" },
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         console.log(res.data);
         fetchContents();

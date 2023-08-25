@@ -9,6 +9,11 @@ export default function SignUpForAdmin({
   isSignUp,
   url,
 }) {
+  const [seconds, setSeconds] = useState(3);
+
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+
   const [email, setEmail] = useState("");
   const [emailCheck, setEmailCheck] = useState(false);
   const [isEmailWarringTextView, setIsEmailWarringTextView] = useState(false);
@@ -33,9 +38,9 @@ export default function SignUpForAdmin({
   const [isPhoneNumberReg, setIsPhoneNumberReg] = useState(false);
 
   const [smsCode, setSmsCode] = useState("");
-  const [isSmsCode, setIsSmsCode] = useState(false);
+  const [isSmsCodeCheck, setIsSmsCodeCheck] = useState(false);
   const [isSmsCodeFocused, setIsSmsCodeFocused] = useState(false);
-  const resSmsCode = "1234";
+  const [resSmsCode, setResSmsCode] = useState("");
 
   const [phoneNumberCheck, setPhoneNumberCheck] = useState(false);
 
@@ -61,14 +66,15 @@ export default function SignUpForAdmin({
   //폰 번호 보내고 인증번호 요청
   const phoneNumberReq = async (e) => {
     e.preventDefault();
-    setIsSmsCode(true);
+    setIsSmsCodeCheck(true);
     console.log(`+82${phoneNumber.replaceAll("-", "")}`);
     await axios
       .post(`${url}members/signup/message`, {
-        phoneNumber: phoneNumber,
+        phoneNumber: `+82${phoneNumber.replaceAll("-", "")}`,
       })
       .then((res) => {
-        resSmsCode = res.data;
+        setResSmsCode(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         alert(err);
@@ -81,8 +87,11 @@ export default function SignUpForAdmin({
     await axios
       .post(`${url}members/signup/email-check`, { email: email })
       .then((res) => {
-        console.log(res.data);
-        setIsEmailSameCheck(true);
+        console.log(res.data.data);
+        alert(res.data.data);
+        if (res.data.status === 200) {
+          setIsEmailSameCheck(true);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -91,12 +100,12 @@ export default function SignUpForAdmin({
   };
   //email 최종 체크 함수
   const isValidEmail = () => {
+    //setEmailCheck가 false일 시 밑에 경고 메시지
+    setIsEmailWarringTextView(!emailCheck);
     //정규식 및 중복체크 모두 true일 시 최종 이메일 체크를 true로 변경
     valueRegCheck(emailReg, email) && isEmailSameCheck
       ? setEmailCheck(true)
       : setEmailCheck(false);
-    //setEmailCheck가 false일 시 밑에 경고 메시지
-    setIsEmailWarringTextView(!emailCheck);
   };
   //password 최종 체크 함수
   const isValidPassword = () => {
@@ -114,9 +123,13 @@ export default function SignUpForAdmin({
     e.preventDefault();
     console.log(smsCode);
 
-    smsCode === resSmsCode
-      ? setPhoneNumberCheck(true)
-      : setPhoneNumberCheck(false);
+    if (smsCode === resSmsCode) {
+      setPhoneNumberCheck(true);
+      alert("인증 완료");
+    } else {
+      setPhoneNumberCheck(false);
+      alert("인증번호를 확인해주세요");
+    }
     console.log("전화번호 최종 체크 : ", phoneNumberCheck);
   };
   //회원가입 완료 함수
@@ -128,16 +141,21 @@ export default function SignUpForAdmin({
       nickName: nickName,
       phoneNumber: phoneNumber,
     };
-    isSignUp(userInfo, `${url}membbers/admin/signup`);
+    isSignUp(userInfo, `${url}members/admin/signup`, `/admin/login`);
   };
 
   useEffect(() => {
-    isValidPassword();
-  }, [password, confirmPassword, isPassWordFocused, isConfirmPassWordFocused]);
-  useEffect(() => {
     isValidEmail();
-  }, [email, isEmailFocused]);
-
+    isValidPassword();
+  }, [
+    isEmailFocused,
+    isEmailSameCheck,
+    isPassWordFocused,
+    confirmPassword,
+    isPassWordFocused,
+    isConfirmPassWordFocused,
+    isNickNameFocused,
+  ]);
   useEffect(() => {
     if (!password && !confirmPassword) {
       setIsPasswordWarringTextView(false);
@@ -157,11 +175,30 @@ export default function SignUpForAdmin({
       setIsPhoneNumberReg(true);
     } else {
       setIsPhoneNumberReg(false);
-      setIsSmsCode(false);
+      setIsSmsCodeCheck(false);
     }
 
     console.log("phoneReg : ", isPhoneNumberReg);
   }, [phoneNumber]);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (seconds > 0 && !phoneNumberCheck && resSmsCode !== "") {
+        setSeconds(seconds - 1);
+      }
+    }, 1000);
+    if (seconds === 0) {
+      setIsPhoneNumberReg(false);
+      setResSmsCode("");
+      setPhoneNumber("");
+      alert("인증 버튼을 다시 눌러주세요");
+      setSeconds(180);
+    }
+    return () => {
+      if (phoneNumber) {
+        clearInterval(timer);
+      }
+    };
+  }, [seconds, resSmsCode]);
   return (
     <div
       className={`${styles.BackGround} flex flex-col justify-center items-center w-screen h-screen`}
@@ -189,6 +226,7 @@ export default function SignUpForAdmin({
                 className={`${styles.FormInput} `}
                 placeholder="이메일 입력해주세요"
                 type="email"
+                disabled={emailCheck}
                 value={email || ""}
                 onChange={(e) => {
                   inputValue(e, setEmail);
@@ -413,7 +451,7 @@ export default function SignUpForAdmin({
               ) : null}
             </div>
           </div>
-          {isSmsCode && isPhoneNumberReg ? (
+          {isSmsCodeCheck && isPhoneNumberReg ? (
             <div
               className={`${styles.FormItem} ${
                 isSmsCodeFocused ? styles.FormItemFocus : ""
@@ -464,6 +502,13 @@ export default function SignUpForAdmin({
                 </button>
               </div>
             </div>
+          ) : null}
+          {isSmsCodeCheck && isPhoneNumberReg && !phoneNumberCheck ? (
+            <p className="mb-2">
+              남은 시간: {minutes < 10 ? "0" : ""}
+              {minutes}:{remainingSeconds < 10 ? "0" : ""}
+              {remainingSeconds}
+            </p>
           ) : null}
 
           <div className="mb-10">

@@ -34,22 +34,29 @@ export default function AdminMovieUpdateModal({
       subTitle: subTitle,
       explanation: explanation,
       genre: genre,
-      accessKey: accessKey,
+      accessKey: "",
     };
     const blob = new Blob([JSON.stringify(movieUpdateReqDto)], {
       type: "application/json",
     });
+    console.log(accessKey);
     const formData = new FormData();
     console.log(movieUpdateReqDto);
+
     formData.append("file", accessKey);
     formData.append("movieUpdateReqDto", blob, "movieUpdateReqDto.json");
 
     await axios
-      .put(`${apiUrl}movies/${movie["id"]}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+      .put(
+        `${apiUrl}movies/${movie["id"]}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         },
-      })
+        { withCredentials: true }
+      )
       .then((res) => {
         console.log(res.data);
         fetchMovies();

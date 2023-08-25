@@ -23,7 +23,7 @@ export default function Login({
     };
     isLogin(loginInfo, `${url}/members/login`);
 
-    console.log(`Email : ${email}\npassword : ${password}`);
+    console.log(`email : ${email}\npassword : ${password}`);
   };
 
   useEffect(() => {

@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import Modal from '../pages/Modal';
-import axios from 'axios';
+import React, { useState } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Modal from "../pages/Modal";
+import axios from "axios";
 
 const Main = () => {
   // 구독 여부 상태
   const [isSubscribed, setIsSubscribed] = useState(true);
   const [modal, setModal] = useState(false);
-  const [modalImage, setModalImage] = useState('');
-  const [modalTitle, setModalTitle] = useState('');
-  const [modalGenre, setModalGenre] = useState('');
-  const [modalReleaseDate, setModalReleaseDate] = useState('');
+  const [modalImage, setModalImage] = useState("");
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalGenre, setModalGenre] = useState("");
+  const [modalReleaseDate, setModalReleaseDate] = useState("");
 
   // openModal 함수 정의
   const openModal = (imageSrc, title, genre, releaseDate) => {
@@ -26,7 +26,7 @@ const Main = () => {
   // closeModal 함수 정의
   const closeModal = () => {
     setModal(false);
-    setModalImage('');
+    setModalImage("");
   };
 
   // 캐러셀 이미지 크기 & 타이틀
@@ -49,7 +49,7 @@ const Main = () => {
       onClick={onClick}
       type="button"
     >
-      {'>'}
+      {">"}
     </button>
   );
 
@@ -60,7 +60,7 @@ const Main = () => {
       onClick={onClick}
       type="button"
     >
-      {'<'}
+      {"<"}
     </button>
   );
 
@@ -86,166 +86,166 @@ const Main = () => {
   const slides1 = [
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "최애의 아이",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "주술회전",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
-      title: '도쿄 리벤저스',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "도쿄 리벤저스",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
-      title: '스킵과 로퍼',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "스킵과 로퍼",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "최애의 아이",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "주술회전",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
   ];
 
   const slides2 = [
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "최애의 아이",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "주술회전",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
-      title: '도쿄 리벤저스',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "도쿄 리벤저스",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
-      title: '스킵과 로퍼',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "스킵과 로퍼",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "최애의 아이",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "주술회전",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
   ];
 
   const slides3 = [
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "최애의 아이",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "주술회전",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
-      title: '도쿄 리벤저스',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "도쿄 리벤저스",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
-      title: '스킵과 로퍼',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "스킵과 로퍼",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "최애의 아이",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "주술회전",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
   ];
 
   const slides4 = [
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "최애의 아이",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "주술회전",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/3.jpg`,
-      title: '도쿄 리벤저스',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "도쿄 리벤저스",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/4.jpg`,
-      title: '스킵과 로퍼',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "스킵과 로퍼",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/1.jpg`,
-      title: '최애의 아이',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "최애의 아이",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
     {
       imageSrc: `${process.env.PUBLIC_URL}/img/2.jpg`,
-      title: '주술회전',
-      genre: '애니메이션',
-      releaseDate: '2023-08-23',
+      title: "주술회전",
+      genre: "애니메이션",
+      releaseDate: "2023-08-23",
     },
   ];
 
   axios
-    .get('https://a409-218-154-176-12.ngrok-free.app/movies')
+    .get("https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/movies")
     .then((response) => {
       console.log(response);
     })
     .catch((error) => {
-      console.error('Error:', error);
+      console.error("Error:", error);
     });
 
   return (

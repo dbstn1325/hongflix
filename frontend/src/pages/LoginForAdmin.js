@@ -21,9 +21,9 @@ export default function LoginForAdmin({
       email: email,
       password: password,
     };
-    isLogin(loginInfo, `${url}member/admin/login`);
+    isLogin(loginInfo, `${url}members/admin/login`);
 
-    console.log(`Email : ${email}\npassword : ${password}`);
+    console.log(`email : ${email}\npassword : ${password}`);
   };
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function LoginForAdmin({
                 <input
                   className={`${styles.FormInput}`}
                   placeholder="이메일 입력해주세요"
-                  type="Email"
+                  type="email"
                   value={email || ""}
                   onChange={(e) => {
                     inputValue(e, setEmail);

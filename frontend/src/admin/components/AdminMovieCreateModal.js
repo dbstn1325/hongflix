@@ -40,11 +40,16 @@ export default function AdminMovieCreateModal({
     formData.append("movieCreateReqDto", blob, "movieCreateReqDto.json");
 
     await axios
-      .post(`${apiUrl}movies`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+      .post(
+        `${apiUrl}movies`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         },
-      })
+        { withCredentials: true }
+      )
       .then((res) => {
         console.log(res.data);
         fetchMovies();

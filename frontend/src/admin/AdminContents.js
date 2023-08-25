@@ -8,7 +8,7 @@ import AdminContentCreateModal from "./components/AdminContentCreateModal";
 import AdminContentUpdateModal from "./components/AdminContentUpdateModal";
 import AdminContentDeleteModal from "./components/AdminContentDeleteModal";
 
-const apiUrl = "http://localhost:8080/";
+const apiUrl = "https://kwyrmjf86a.execute-api.ap-northeast-2.amazonaws.com/";
 
 export default function AdminContents() {
   const { movieTitle, movieId } = useParams();
@@ -28,7 +28,7 @@ export default function AdminContents() {
 
   const fetchContents = async () => {
     await axios
-      .get(`${apiUrl}contents/${movieId}`)
+      .get(`${apiUrl}contents/${movieId}`, { withCredentials: true })
       .then((res) => {
         console.log(res.data);
         setContents(res.data);

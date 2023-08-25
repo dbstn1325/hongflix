@@ -35,9 +35,14 @@ export default function AdminContentUpdateModal({
     formData.append("file", accessUrl);
     formData.append("contentUpdateReqDto", blob, "contentUpdateReqDto.json");
     await axios
-      .put(`${apiUrl}contents/${content["id"]}`, formData, {
-        header: { "Content-Type": "multipart/form-data" },
-      })
+      .put(
+        `${apiUrl}contents/${content["id"]}`,
+        formData,
+        {
+          header: { "Content-Type": "multipart/form-data" },
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         console.log(res.data);
         fetchContents();
