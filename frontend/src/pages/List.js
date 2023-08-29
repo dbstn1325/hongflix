@@ -47,35 +47,7 @@ const List = () => {
   }, [modalId, navigate]);
 
   const openVideoWindow = (videoUrl) => {
-    const newWindow = window.open('', '_blank');
-    if (newWindow) {
-      newWindow.document.body.innerHTML = `
-        <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet">
-        <script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
-        <script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
-        
-        <style>
-          body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-          }
-          #my-video {
-            width: 100%;
-            height: 100%;
-          }
-        </style>
-        <video id="my-video" class="video-js vjs-default-skin" controls>
-          <source src="${videoUrl}" type="vnd.apple.mpegURL">
-        </video>
-        <script>
-          var player = videojs('my-video', {
-            techOrder: ['html5']
-          });
-        </script>`;
-    }
+    window.open(videoUrl, '_blank');
   };
 
   return (
